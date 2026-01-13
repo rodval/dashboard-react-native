@@ -1,16 +1,28 @@
+import SplashScreen from '@/components/splash-screen';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export const unstable_settings = {
   anchor: '(tabs)',
 };
 
 export default function RootLayout() {
+  const [isAppReady, setIsAppReady] = useState(false);
   const colorScheme = useColorScheme();
+
+
+    if ( !isAppReady) {
+    return (
+      <SplashScreen
+        onFinish={(isCancelled) => !isCancelled && setIsAppReady(true)}
+      />
+    );
+  }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
