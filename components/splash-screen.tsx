@@ -1,6 +1,6 @@
 import LottieView from "lottie-react-native";
 
-import cocoa from "@/assets/boxful/splash.json";
+import splash from "@/assets/boxful/splash.json";
 
 export default function SplashScreen({
   onFinish = (isCancelled) => {},
@@ -9,7 +9,7 @@ export default function SplashScreen({
 }) {
   return (
     <LottieView
-      source={cocoa}
+      source={splash}
       onAnimationFinish={onFinish}
       autoPlay
       resizeMode="cover"
