@@ -1,98 +1,230 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { ActionButton } from "@/components/button/action-button";
+import { CustomButton } from "@/components/button/custom-button";
+import { ThemedText } from "@/components/themed-text";
+import { Ionicons } from "@expo/vector-icons";
+import { Image } from "expo-image";
+import React from "react";
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  // Datos de ejemplo para envíos recientes
+  const recentShipments = [
+    { id: 1, recipient: "Saúl López", status: "Completado", color: "#4CAF50" },
+    { id: 2, recipient: "Saúl López", status: "Pendiente", color: "#FF9800" },
+    { id: 3, recipient: "Saúl López", status: "Atrasar", color: "#F44336" },
+  ];
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+
+      <View style={styles.header}>
+        <ThemedText type="subtitle" style={styles.textColor}>
+          ¡Hola, Regalos SV!
         </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+
+        <View style={styles.headerRight}>
+          <Ionicons
+            name="notifications-outline"
+            size={24}
+            color="#000"
+            style={styles.icon}
+          />
+          <Image
+            source={require("@/assets/boxful/menu-icon.png")}
+            style={styles.menuIcon}
+          />
+        </View>
+      </View>
+
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
+        <ThemedText
+          type="title"
+          style={[styles.textColor, styles.greetingMessage]}
+        >
+          ¿Qué necesitas hacer?
         </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+
+        <View style={styles.actionsContainer}>
+          <CustomButton
+            icon="add-circle-outline"
+            title="Hacer envío"
+            action={() => {}}
+          />
+
+          <View style={styles.quickActionsContainer}>
+            <ActionButton
+              icon="calculator-outline"
+              title="Cotiza"
+              action={() => {}}
+            />
+            <ActionButton icon="cube-outline" title="Lotes" action={() => {}} />
+            <ActionButton
+              icon="pricetag-outline"
+              title="Cupón"
+              action={() => {}}
+            />
+            <ActionButton
+              icon="help-circle-outline"
+              title="Ayuda"
+              action={() => {}}
+            />
+          </View>
+        </View>
+
+        <View style={styles.bannerContainer}>
+          <Image
+            source={require("@/assets/boxful/home-banner.png")}
+            style={styles.banner}
+          />
+        </View>
+
+        <View style={styles.recentShipmentsContainer}>
+          <ThemedText
+            type="subtitle"
+            style={[styles.textColor, { marginBottom: 20 }]}
+          >
+            Envíos recientes
+          </ThemedText>
+
+          {recentShipments.map((shipment) => (
+            <View key={shipment.id} style={styles.shipmentCard}>
+              <View style={styles.shipmentsIcon}>
+                <Ionicons name="cube-outline" size={28} color="rgb(92,68,60)" />
+              </View>
+              <View style={styles.shipmentInfo}>
+                <ThemedText type="caption" style={styles.shipmentLabel}>
+                  Destinatario
+                </ThemedText>
+                <ThemedText type="caption" style={styles.shipmentRecipient}>
+                  {shipment.recipient}
+                </ThemedText>
+              </View>
+              <View style={styles.statusBadge}>
+                <Text style={[styles.statusText, { color: shipment.color }]}>
+                  {shipment.status}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  icon: {
+    marginRight: 16,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
+  scrollView: {
+    flex: 1,
+  },
+  bannerContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
+  banner: {
+    flex: 1,
+    height: 151,
+    borderRadius: 12,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  textColor: {
+    color: "#141F58",
+  },
+  greetingMessage: {
+    paddingHorizontal: 20,
+    paddingVertical: 40,
+    textAlign: "center",
+  },
+  menuIcon: {
+    height: 18.37,
+    width: 23.19,
     bottom: 0,
     left: 0,
-    position: 'absolute',
+  },
+  actionsContainer: {
+    flexDirection: "column",
+    paddingHorizontal: 20,
+    flexWrap: "wrap",
+  },
+  quickActionsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 2,
+    paddingTop: 15,
+  },
+  recentShipmentsContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 40,
+    backgroundColor: "#F3EEEC",
+    borderRadius: 12,
+  },
+  shipmentInfo: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  shipmentCard: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#ffff",
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+    borderColor: "#D0B9B3",
+    borderWidth: 1,
+  },
+  shipmentsIcon: {
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    backgroundColor: "#E8DCD9",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  shipmentLabel: {
+    color: "#666",
+    marginBottom: 4,
+  },
+  shipmentRecipient: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#000",
+  },
+  statusBadge: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 15,
+  },
+  statusText: {
+    color: "#fff",
+    fontSize: 12,
+    fontWeight: "500",
   },
 });
