@@ -1,7 +1,8 @@
+import { useAuth } from "@/providers/auth-provider";
 import { Image } from "expo-image";
-import { router } from "expo-router";
 import React, { useState } from "react";
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -18,9 +19,24 @@ import { ThemedView } from "../themed-view";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
 
-  const handleLogin = () => {
-    router.replace("/(tabs)");
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Por favor ingresa email y contraseña");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await signIn(email, password);
+    } catch (error: any) {
+      Alert.alert("Error", error.message || "Error al iniciar sesión");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handlePasskeyLogin = () => {
@@ -33,15 +49,20 @@ export default function LoginForm() {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={styles.keyboardAvoidingView}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
     >
       <ScrollView
         style={styles.scrollView}
+        contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
         <View style={styles.welcomeContainer}>
-          <Text style={styles.welcomeText}>Bienvenido a boxful</Text>
+          <Text style={[styles.welcomeText, styles.textColor]}>
+            Bienvenido a boxful 🦄
+          </Text>
           <Text style={styles.subtitle}>Ingresa tu correo electrónico</Text>
         </View>
 
@@ -75,14 +96,17 @@ export default function LoginForm() {
                 source={require("@/assets/boxful/footprint.png")}
                 style={styles.footprintIcon}
               />
-              <ThemedText type="link">Ingresar con passkey</ThemedText>
+              <ThemedText type="link" style={styles.textColor}>
+                Ingresar con passkey
+              </ThemedText>
             </TouchableOpacity>
           </ThemedView>
 
           <CustomButton
-            title="Iniciar sesión"
+            title={loading ? "Iniciando..." : "Iniciar sesión"}
             action={handleLogin}
             style={styles.loginButton}
+            disabled={loading}
           />
 
           {/* Separador */}
@@ -94,7 +118,9 @@ export default function LoginForm() {
 
           <ThemedView style={styles.linkContainer}>
             <TouchableOpacity onPress={handleRegister}>
-              <ThemedText type="link">Registrar cuenta</ThemedText>
+              <ThemedText type="link" style={styles.textColor}>
+                Registrar cuenta
+              </ThemedText>
             </TouchableOpacity>
           </ThemedView>
         </View>
@@ -110,6 +136,13 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  textColor: {
+    color: "#2E49CE",
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    paddingBottom: 20,
+  },
   welcomeContainer: {
     alignItems: "flex-start",
     marginVertical: 20,
@@ -122,7 +155,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: "#666",
+    color: "#4E4C4C",
   },
   formContainer: {
     width: "100%",
@@ -141,7 +174,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   loginButton: {
-    backgroundColor: "#3419e0",
+    backgroundColor: "#2E49CE",
     height: 60,
     marginTop: 30,
     marginBottom: 15,

@@ -25,6 +25,7 @@ const FloatingLabelInputNative: React.FC<FloatingLabelInputProps> = ({
   isPassword = false,
   showIcon = false,
   iconComponent,
+  secureTextEntry,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -90,7 +91,7 @@ const FloatingLabelInputNative: React.FC<FloatingLabelInputProps> = ({
           <Ionicons
             name={showPassword ? "eye-off" : "eye"}
             size={24}
-            color="gray"
+            color="#2E49CE"
           />
         </TouchableOpacity>
       );
@@ -123,7 +124,7 @@ const FloatingLabelInputNative: React.FC<FloatingLabelInputProps> = ({
           value={value}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          secureTextEntry={isPassword && !showPassword}
+          secureTextEntry={isPassword ? !showPassword : secureTextEntry}
           {...props}
         />
 
