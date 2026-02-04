@@ -1,26 +1,14 @@
 import { ActionButton } from "@/components/button/action-button";
 import { CustomButton } from "@/components/button/custom-button";
 import { ThemedText } from "@/components/themed-text";
+import { RECENT_SHIPMENTS } from "@/constants/mock-recent-orders-data";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import React from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
-  // Datos de ejemplo para envíos recientes
-  const recentShipments = [
-    { id: 1, recipient: "Saúl López", status: "Completado", color: "#4CAF50" },
-    { id: 2, recipient: "Saúl López", status: "Pendiente", color: "#FF9800" },
-    { id: 3, recipient: "Saúl López", status: "Atrasar", color: "#F44336" },
-  ];
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -97,7 +85,7 @@ export default function HomeScreen() {
             Envíos recientes
           </ThemedText>
 
-          {recentShipments.map((shipment) => (
+          {RECENT_SHIPMENTS.map((shipment) => (
             <View key={shipment.id} style={styles.shipmentCard}>
               <View style={styles.shipmentsIcon}>
                 <Ionicons name="cube-outline" size={28} color="rgb(92,68,60)" />
