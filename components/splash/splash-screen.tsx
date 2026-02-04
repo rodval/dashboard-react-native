@@ -1,6 +1,7 @@
+import splash from "@/assets/lotties/splash.json";
 import LottieView from "lottie-react-native";
-
-import splash from "@/assets/boxful/splash.json";
+import { StyleSheet } from "react-native";
+import Animated from "react-native-reanimated";
 
 export default function SplashScreen({
   onFinish = (isCancelled) => {},
@@ -8,16 +9,27 @@ export default function SplashScreen({
   onFinish?: (isCancelled: boolean) => void;
 }) {
   return (
-    <LottieView
-      source={splash}
-      onAnimationFinish={onFinish}
-      autoPlay
-      resizeMode="cover"
-      loop={false}
-      style={{
-        flex: 1,
-        width: "100%",
-      }}
-    />
+    <Animated.View style={styles.container}>
+      <LottieView
+        source={splash}
+        onAnimationFinish={onFinish}
+        autoPlay
+        resizeMode="contain"
+        loop={false}
+        style={styles.lottie}
+      />
+    </Animated.View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  lottie: {
+    width: "80%",
+    height: "100%",
+  },
+});

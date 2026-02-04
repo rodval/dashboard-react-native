@@ -93,7 +93,7 @@ export default function LoginForm() {
               onPress={handlePasskeyLogin}
             >
               <Image
-                source={require("@/assets/boxful/footprint.png")}
+                source={require("@/assets/icons/footprint.png")}
                 style={styles.footprintIcon}
               />
               <ThemedText type="link" style={styles.textColor}>
