@@ -1,8 +1,9 @@
 // FloatingLabelInputNative.tsx
 import { Ionicons } from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   Animated,
+  useAnimatedValue,
   StyleSheet,
   Text,
   TextInput,
@@ -30,7 +31,7 @@ const FloatingLabelInputNative: React.FC<FloatingLabelInputProps> = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const animatedIsFocused = useRef(new Animated.Value(value ? 1 : 0)).current;
+  const animatedIsFocused = useAnimatedValue(value ? 1 : 0);
 
   const handleFocus = () => {
     setIsFocused(true);

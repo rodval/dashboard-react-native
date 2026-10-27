@@ -1,8 +1,8 @@
 import FadeInView from "@/components/FadeInView";
 import SplashScreen from "@/components/splash/splash-screen";
 import { AuthProvider } from "@/providers/auth-provider";
-import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
+import { DefaultTheme, ThemeProvider } from "expo-router/react-navigation";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";

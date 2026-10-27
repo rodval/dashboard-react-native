@@ -4,14 +4,15 @@ import { ThemedText } from "@/components/themed-text";
 import { RECENT_SHIPMENTS } from "@/constants/mock-recent-orders-data";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar style="dark" />
 
       <View style={styles.header}>
         <ThemedText type="subtitle" style={styles.textColor}>
@@ -26,7 +27,7 @@ export default function HomeScreen() {
             style={styles.icon}
           />
           <Image
-            source={require("@/assets/boxful/menu-icon.png")}
+            source={require("@/assets/custom/menu.png")}
             style={styles.menuIcon}
           />
         </View>
@@ -72,7 +73,7 @@ export default function HomeScreen() {
 
         <View style={styles.bannerContainer}>
           <Image
-            source={require("@/assets/boxful/home-banner.png")}
+            source={require("@/assets/custom/home-banner.jpeg")}
             style={styles.banner}
           />
         </View>

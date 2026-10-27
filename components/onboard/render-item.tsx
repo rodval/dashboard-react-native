@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   circleContainer: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     alignItems: "center",
     justifyContent: "flex-end",
   },
