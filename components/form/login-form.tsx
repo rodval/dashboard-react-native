@@ -1,6 +1,6 @@
 import { useAuth } from "@/providers/auth-provider";
 import { Image } from "expo-image";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Alert,
   KeyboardAvoidingView,
@@ -58,8 +58,8 @@ export default function LoginForm() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.welcomeContainer}>
-          <Text style={styles.welcomeText}>Bienvenido a boxful 🦄</Text>
-          <Text style={styles.subtitle}>Ingresa tu correo electrónico</Text>
+          <Text style={styles.welcomeText}>Bienvenido</Text>
+          <Text style={styles.subtitle}>Lorem ipsum dolor sit amet</Text>
         </View>
 
         <View style={styles.formContainer}>

@@ -25,7 +25,6 @@ export default function LoginScreen() {
 
       {/* Floating form card */}
       <View style={styles.card}>
-        <View style={styles.cardHandle} />
         <LoginForm />
       </View>
     </View>
@@ -35,11 +34,11 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0F1C3F",
+    backgroundColor: "#e4dacc",
   },
   hero: {
     height: height * 0.42,
-    backgroundColor: "#0F1C3F",
+    backgroundColor: "#e4dacc",
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
@@ -75,23 +74,16 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     backgroundColor: "#fff",
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
+    borderRadius: 32,
     paddingHorizontal: 24,
-    paddingTop: 16,
+    paddingTop: 30,
     marginTop: -24,
+    marginBottom: 20,
+    marginHorizontal: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.1,
     shadowRadius: 12,
     elevation: 10,
-  },
-  cardHandle: {
-    width: 40,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: "#E0E0E0",
-    alignSelf: "center",
-    marginBottom: 20,
   },
 });

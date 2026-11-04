@@ -5,18 +5,17 @@ import { RECENT_SHIPMENTS } from "@/constants/mock-recent-orders-data";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <StatusBar style="dark" />
 
       <View style={styles.header}>
         <ThemedText type="subtitle" style={styles.textColor}>
-          ¡Hola, Regalos SV!
+          ¡Hola mundo!
         </ThemedText>
 
         <View style={styles.headerRight}>
@@ -35,6 +34,7 @@ export default function HomeScreen() {
 
       <ScrollView
         style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         <ThemedText
@@ -54,18 +54,22 @@ export default function HomeScreen() {
           <View style={styles.quickActionsContainer}>
             <ActionButton
               icon="calculator-outline"
-              title="Cotiza"
+              title="Test"
               action={() => {}}
             />
-            <ActionButton icon="cube-outline" title="Lotes" action={() => {}} />
+            <ActionButton 
+              icon="cube-outline" 
+              title="Test" 
+              action={() => {}} 
+            />
             <ActionButton
               icon="pricetag-outline"
-              title="Cupón"
+              title="Test"
               action={() => {}}
             />
             <ActionButton
               icon="help-circle-outline"
-              title="Ayuda"
+              title="Test"
               action={() => {}}
             />
           </View>
@@ -123,6 +127,9 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  scrollContent: {
+    paddingBottom: 20,
+  },
   bannerContainer: {
     paddingHorizontal: 20,
     paddingVertical: 20,
@@ -137,7 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingVertical: 15,
   },
   headerRight: {
     flexDirection: "row",

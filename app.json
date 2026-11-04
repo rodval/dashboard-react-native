@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "challenge-boxfull",
-    "slug": "challenge-boxfull",
+    "name": "dashboard-app",
+    "slug": "dashboard-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "challengeboxfull",
+    "scheme": "dashboardapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.challengeboxfull"
+      "bundleIdentifier": "com.anonymous.dashboardapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.challengeboxfull"
+      "package": "com.anonymous.dashboardapp"
     },
     "web": {
       "output": "static",

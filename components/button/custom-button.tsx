@@ -41,7 +41,7 @@ export function CustomButton({
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
-    backgroundColor: "#FF6139",
+    backgroundColor: "#76b2b5",
     borderRadius: 12,
     height: 70,
     justifyContent: "center",
