@@ -8,20 +8,20 @@ export interface RecentShipment {
 export const RECENT_SHIPMENTS: RecentShipment[] = [
   {
     id: 1,
-    recipient: "Saúl López",
+    recipient: "Test Test",
     status: "Completado",
     color: "#4CAF50",
   },
   {
     id: 2,
-    recipient: "Saúl López",
+    recipient: "Test Test",
     status: "Pendiente",
     color: "#FF9800",
   },
   {
     id: 3,
-    recipient: "Saúl López",
-    status: "Atrasar",
+    recipient: "Test Test",
+    status: "Atrasado",
     color: "#F44336",
   },
 ];
