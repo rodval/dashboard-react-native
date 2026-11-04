@@ -17,7 +17,7 @@ export type ActionButtonProps = TouchableOpacityProps & {
 export function ActionButton({
   style,
   icon,
-  iconColor = "#FF6139",
+  iconColor = "#76b2b5",
   iconSize = 24,
   title,
   action,
@@ -45,11 +45,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 18,
-    borderColor: "#FF6139",
+    borderColor: "#76b2b5",
     borderWidth: 1,
   },
   buttonText: {
-    color: "#FF6139",
+    color: "#76b2b5",
     fontSize: 14,
     fontWeight: "600",
   },

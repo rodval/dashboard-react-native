@@ -1,33 +1,21 @@
 import { ActionButton } from "@/components/button/action-button";
 import { CustomButton } from "@/components/button/custom-button";
 import { ThemedText } from "@/components/themed-text";
+import { RECENT_SHIPMENTS } from "@/constants/mock-recent-orders-data";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import React from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
-  // Datos de ejemplo para envíos recientes
-  const recentShipments = [
-    { id: 1, recipient: "Saúl López", status: "Completado", color: "#4CAF50" },
-    { id: 2, recipient: "Saúl López", status: "Pendiente", color: "#FF9800" },
-    { id: 3, recipient: "Saúl López", status: "Atrasar", color: "#F44336" },
-  ];
-
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
+      <StatusBar style="dark" />
 
       <View style={styles.header}>
         <ThemedText type="subtitle" style={styles.textColor}>
-          ¡Hola, Regalos SV!
+          ¡Hola mundo!
         </ThemedText>
 
         <View style={styles.headerRight}>
@@ -38,7 +26,7 @@ export default function HomeScreen() {
             style={styles.icon}
           />
           <Image
-            source={require("@/assets/boxful/menu-icon.png")}
+            source={require("@/assets/custom/menu.png")}
             style={styles.menuIcon}
           />
         </View>
@@ -46,6 +34,7 @@ export default function HomeScreen() {
 
       <ScrollView
         style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         <ThemedText
@@ -65,18 +54,22 @@ export default function HomeScreen() {
           <View style={styles.quickActionsContainer}>
             <ActionButton
               icon="calculator-outline"
-              title="Cotiza"
+              title="Test"
               action={() => {}}
             />
-            <ActionButton icon="cube-outline" title="Lotes" action={() => {}} />
+            <ActionButton 
+              icon="cube-outline" 
+              title="Test" 
+              action={() => {}} 
+            />
             <ActionButton
               icon="pricetag-outline"
-              title="Cupón"
+              title="Test"
               action={() => {}}
             />
             <ActionButton
               icon="help-circle-outline"
-              title="Ayuda"
+              title="Test"
               action={() => {}}
             />
           </View>
@@ -84,7 +77,7 @@ export default function HomeScreen() {
 
         <View style={styles.bannerContainer}>
           <Image
-            source={require("@/assets/boxful/home-banner.png")}
+            source={require("@/assets/custom/home-banner.jpeg")}
             style={styles.banner}
           />
         </View>
@@ -97,7 +90,7 @@ export default function HomeScreen() {
             Envíos recientes
           </ThemedText>
 
-          {recentShipments.map((shipment) => (
+          {RECENT_SHIPMENTS.map((shipment) => (
             <View key={shipment.id} style={styles.shipmentCard}>
               <View style={styles.shipmentsIcon}>
                 <Ionicons name="cube-outline" size={28} color="rgb(92,68,60)" />
@@ -134,6 +127,9 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  scrollContent: {
+    paddingBottom: 20,
+  },
   bannerContainer: {
     paddingHorizontal: 20,
     paddingVertical: 20,
@@ -148,7 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingVertical: 15,
   },
   headerRight: {
     flexDirection: "row",

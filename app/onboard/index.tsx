@@ -2,8 +2,8 @@ import { ActionButton } from "@/components/button/action-button";
 import Pagination from "@/components/onboard/pagination";
 import RenderItem from "@/components/onboard/render-item";
 import { ONBOARDING_DATA, OnboardingStep } from "@/constants/onboarding-data";
-import { useCallback, useRef } from "react";
-import { FlatList, StyleSheet, View, ViewToken } from "react-native";
+import { useCallback } from "react";
+import { FlatList, StyleSheet, View, type ListViewToken } from "react-native";
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -11,6 +11,11 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+
+const VIEWABILITY_CONFIG = {
+  minimumViewTime: 300,
+  itemVisiblePercentThreshold: 10,
+};
 
 export default function OnboardScreen({
   onFinish = (isCancelled) => {},
@@ -33,19 +38,14 @@ export default function OnboardScreen({
   });
 
   const onViewableItemsChanged = useCallback(
-    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+    ({ viewableItems }: { viewableItems: ListViewToken[] }) => {
       const firstViewable = viewableItems[0];
-      if (firstViewable.index !== null && firstViewable.index !== undefined) {
-        scrollIndex.value = firstViewable.index ?? 0;
+      if (firstViewable?.index != null) {
+        scrollIndex.set(firstViewable.index);
       }
     },
-    []
+    [scrollIndex]
   );
-
-  const viewabilityConfig = useRef({
-    minimumViewTime: 300,
-    itemVisiblePercentThreshold: 10,
-  });
 
   const buttonAnimatedStyle = useAnimatedStyle(() => {
     const isLastItem = scrollIndex.value === ONBOARDING_DATA.length - 1;
@@ -75,7 +75,7 @@ export default function OnboardScreen({
         )}
         onScroll={onScroll}
         onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={viewabilityConfig.current}
+        viewabilityConfig={VIEWABILITY_CONFIG}
       />
       <View style={styles.paginationBottom}>
         <Pagination data={ONBOARDING_DATA} scrollIndex={xValue} />

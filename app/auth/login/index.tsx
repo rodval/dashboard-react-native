@@ -1,52 +1,89 @@
 import LoginForm from "@/components/form/login-form";
-import { BlurView } from "expo-blur";
 import { Image } from "expo-image";
-import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+const { height } = Dimensions.get("window");
 
 export default function LoginScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-      <BlurView intensity={15} tint="dark" style={styles.blurContainer}>
-        <View style={styles.brandContainer}>
+    <View style={styles.container}>
+      {/* Hero background */}
+      <View style={styles.hero}>
+        {/* Decorative circles */}
+        <View style={styles.circleTopRight} />
+        <View style={styles.circleBottomLeft} />
+
+        <SafeAreaView style={styles.heroContent}>
           <Image
-            source={require("@/assets/boxful/logo.png")}
-            style={styles.reactLogo}
+            source={require("@/assets/custom/logo.png")}
+            style={styles.logo}
+            contentFit="contain"
           />
-        </View>
-      </BlurView>
-      <View style={styles.formContainer}>
+        </SafeAreaView>
+      </View>
+
+      {/* Floating form card */}
+      <View style={styles.card}>
         <LoginForm />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#e4dacc",
   },
-  blurContainer: {
-    paddingTop: 24,
-    paddingBottom: 150,
-    justifyContent: "flex-start",
-  },
-  brandContainer: {
+  hero: {
+    height: height * 0.42,
+    backgroundColor: "#e4dacc",
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
+    overflow: "hidden",
   },
-  reactLogo: {
-    height: 39.9,
-    width: 162.48,
-    bottom: 0,
-    left: 0,
+  circleTopRight: {
+    position: "absolute",
+    width: 220,
+    height: 220,
+    borderRadius: 110,
+    backgroundColor: "#2E49CE",
+    opacity: 0.25,
+    top: -60,
+    right: -60,
   },
-  formContainer: {
-    flex: 2,
-    flexDirection: "column",
+  circleBottomLeft: {
+    position: "absolute",
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    backgroundColor: "#2E49CE",
+    opacity: 0.15,
+    bottom: 20,
+    left: -50,
+  },
+  heroContent: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logo: {
+    height: 52,
+    width: 210,
+  },
+  card: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderRadius: 32,
     paddingHorizontal: 24,
-    alignContent: "center",
-    justifyContent: "flex-end",
+    paddingTop: 30,
+    marginTop: -24,
+    marginBottom: 20,
+    marginHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 10,
   },
 });

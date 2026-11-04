@@ -1,6 +1,6 @@
 import { useAuth } from "@/providers/auth-provider";
 import { Image } from "expo-image";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Alert,
   KeyboardAvoidingView,
@@ -13,8 +13,6 @@ import {
 } from "react-native";
 import { CustomButton } from "../button/custom-button";
 import FloatingLabelInputSimple from "../input/simple-input";
-import { ThemedText } from "../themed-text";
-import { ThemedView } from "../themed-view";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -60,10 +58,8 @@ export default function LoginForm() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.welcomeContainer}>
-          <Text style={[styles.welcomeText, styles.textColor]}>
-            Bienvenido a boxful 🦄
-          </Text>
-          <Text style={styles.subtitle}>Ingresa tu correo electrónico</Text>
+          <Text style={styles.welcomeText}>Bienvenido</Text>
+          <Text style={styles.subtitle}>Lorem ipsum dolor sit amet</Text>
         </View>
 
         <View style={styles.formContainer}>
@@ -87,20 +83,18 @@ export default function LoginForm() {
             showIcon={true}
           />
 
-          <ThemedView style={[styles.linkContainer, { marginTop: 25 }]}>
+          <View style={styles.passkeyRow}>
             <TouchableOpacity
               style={{ flexDirection: "row", alignItems: "center" }}
               onPress={handlePasskeyLogin}
             >
               <Image
-                source={require("@/assets/boxful/footprint.png")}
+                source={require("@/assets/icons/footprint.png")}
                 style={styles.footprintIcon}
               />
-              <ThemedText type="link" style={styles.textColor}>
-                Ingresar con passkey
-              </ThemedText>
+              <Text style={styles.linkText}>Ingresar con passkey</Text>
             </TouchableOpacity>
-          </ThemedView>
+          </View>
 
           <CustomButton
             title={loading ? "Iniciando..." : "Iniciar sesión"}
@@ -109,20 +103,17 @@ export default function LoginForm() {
             disabled={loading}
           />
 
-          {/* Separador */}
           <View style={styles.separatorContainer}>
             <View style={styles.separatorLine} />
             <Text style={styles.separatorText}>o también</Text>
             <View style={styles.separatorLine} />
           </View>
 
-          <ThemedView style={styles.linkContainer}>
+          <View style={styles.registerRow}>
             <TouchableOpacity onPress={handleRegister}>
-              <ThemedText type="link" style={styles.textColor}>
-                Registrar cuenta
-              </ThemedText>
+              <Text style={styles.linkText}>Registrar cuenta</Text>
             </TouchableOpacity>
-          </ThemedView>
+          </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -136,67 +127,64 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-  textColor: {
-    color: "#2E49CE",
-  },
   scrollViewContent: {
     flexGrow: 1,
-    paddingBottom: 20,
+    paddingBottom: 24,
   },
   welcomeContainer: {
     alignItems: "flex-start",
-    marginVertical: 20,
+    marginBottom: 24,
   },
   welcomeText: {
-    fontSize: 24,
-    fontWeight: "600",
-    color: "#000",
-    marginBottom: 8,
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#0F1C3F",
+    marginBottom: 6,
   },
   subtitle: {
-    fontSize: 16,
-    color: "#4E4C4C",
+    fontSize: 14,
+    color: "#8A8A9A",
   },
   formContainer: {
     width: "100%",
   },
-  reactLogo: {
-    height: 39.9,
-    width: 162.48,
-    bottom: 0,
-    left: 0,
-  },
   footprintIcon: {
-    height: 18.37,
-    width: 23.19,
-    bottom: 0,
-    left: 0,
+    height: 18,
+    width: 22,
     marginRight: 8,
+  },
+  passkeyRow: {
+    alignItems: "center",
+    marginTop: 20,
   },
   loginButton: {
     backgroundColor: "#2E49CE",
-    height: 60,
-    marginTop: 30,
-    marginBottom: 15,
+    height: 56,
+    marginTop: 28,
+    marginBottom: 12,
+    borderRadius: 14,
   },
   separatorContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 30,
+    marginVertical: 20,
   },
   separatorLine: {
     flex: 1,
     height: 1,
-    backgroundColor: "#eee",
+    backgroundColor: "#EBEBF0",
   },
   separatorText: {
     marginHorizontal: 16,
-    color: "#999",
-    fontSize: 14,
+    color: "#AFAFBF",
+    fontSize: 13,
   },
-  linkContainer: {
+  registerRow: {
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
+  },
+  linkText: {
+    color: "#2E49CE",
+    fontSize: 14,
+    fontWeight: "500",
   },
 });
