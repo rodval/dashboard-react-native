@@ -255,6 +255,8 @@ const handleOnboardFinish = async () => {
 
 **Impacto:** Alto · **Esfuerzo:** Bajo → **Hacer ya**
 
+> ✅ **Resuelto:** implementado en `hooks/use-first-launch.ts` (con tests en `hooks/__tests__/`).
+
 ---
 
 ### 🟡 2. Datos hardcodeados en HomeScreen
@@ -316,7 +318,7 @@ services/
 
 | Prioridad | Acción | Impacto | Esfuerzo |
 |-----------|--------|---------|----------|
-| 1 🔴 | Persistir `isFirstLaunch` con AsyncStorage | Alto | Bajo |
+| 1 ✅ | ~~Persistir `isFirstLaunch` con AsyncStorage~~ | Alto | Bajo |
 | 2 🟡 | Ocultar/placeholders en tabs vacíos | Medio | Bajo |
 | 3 🟡 | Unificar sistema de colores en `theme.ts` | Medio | Bajo |
 | 4 🟡 | Conectar HomeScreen a datos reales de Supabase | Alto | Medio |

@@ -1,5 +1,6 @@
 import FadeInView from "@/components/FadeInView";
 import SplashScreen from "@/components/splash/splash-screen";
+import { useFirstLaunch } from "@/hooks/use-first-launch";
 import { AuthProvider } from "@/providers/auth-provider";
 import { Stack } from "expo-router";
 import { DefaultTheme, ThemeProvider } from "expo-router/react-navigation";
@@ -14,9 +15,11 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const [isAppReady, setIsAppReady] = useState(false);
-  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
+  const { isFirstLaunch, completeOnboarding } = useFirstLaunch();
 
-  if (!isAppReady) {
+  // También esperamos a saber si es la primera vez, para no mostrar
+  // el onboarding un instante y luego saltarlo.
+  if (!isAppReady || isFirstLaunch === null) {
     return (
       <SplashScreen
         onFinish={(isCancelled) => !isCancelled && setIsAppReady(true)}
@@ -28,7 +31,7 @@ export default function RootLayout() {
     return (
       <FadeInView duration={400}>
         <OnboardScreen
-          onFinish={(isCancelled) => setIsFirstLaunch(isCancelled)}
+          onFinish={(isCancelled) => !isCancelled && completeOnboarding()}
         />
       </FadeInView>
     );
